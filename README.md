@@ -2,15 +2,15 @@
 
 ![Alt text](https://media.giphy.com/media/3ohc0PVVsgt578uBkA/giphy.gif)
 ### Disclaimer
-I wrote the majority of this code in 5 days during a hurricane when I was bored. My code isn't horrible but it defnitely isn't a nice and fancy library with amazing documentation. There are likely many bugs and inefficiencies.
+I wrote the majority of this code in 5 days during a hurricane when I was bored. My code isn't horrible but it definitely isn't a nice and fancy library with amazing documentation. There are likely many bugs and inefficiencies.
 
-BUT, getting setup to run the test script is easy enough and I'll help you out there but if you want to actually mess with the core code you'll be mostly on your own.
+BUT, getting setup to run the test script is easy enough and I'll help you out there but if you want to actually mess with the core code you'll be mostly on your own. But trust me, none of this code is crazy complicated especially if you are familiar with Python.
 
 If you have questions contact me on [Twitter](https://twitter.com/FarzaTV).
 
 ### How do I get DeepLeague?
 
-You'll need [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [conda](https://conda.io/docs/user-guide/install/index.html), and [brew](https://brew.sh/). Once you install them you can check if everything works okay by typing in these commands in your terminal. I've confirmed that these steps work on Mac OS and Ubuntu. Windows Users, you're on your own :(. But it shouldn't be to tough if you know your way around the command line.
+You'll need [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [conda](https://conda.io/docs/user-guide/install/index.html), and [brew](https://brew.sh/). Once you install them you can check if everything works okay by typing in these commands in your terminal. I've confirmed that these steps work on Mac OS. Thing should be VERY similar for Linux as well. You'll just have to use some other method to install packages (like apt-get) instead of ```brew``` which I use a few times. Windows Users, you're on your own :(. But it shouldn't be to tough if you know your way around the command line.
 
 ```sh
 $ conda
@@ -20,24 +20,28 @@ $ brew
 
 If you were able to run those three commands without any errors, you can continue.
 ```sh
+# get the repo.
 $ git clone https://github.com/farzaa/DeepLeague.git
 $ cd DeepLeague
 $ cd YAD2K
-$ conda create --n DeepLeague python=3.6
+$ conda create - n DeepLeague python=3.6
 $ source activate DeepLeague
 $ conda install python.app # this install python as a framework for mat plot lib.
 
+# bunch if packages you need.
 $ pip install opencv-python youtube_dl
 $ conda install -c menpo ffmpeg
 $ pip install numpy h5py pillow matplotlib
 $ pip install tensorflow
 $ pip install keras
 
+# get the supporting files for the neural net.
 $ brew install wget
-$ brew install ffmpeg --with--libvpx
+$ brew install ffmpeg --with--libvpx # this may take a while.
 $ wget http://pjreddie.com/media/files/yolo.weights
+$ wget https://archive.org/download/DeepLeagueWeights/trained_stage_3_best.h5
 $ wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolo.cfg
-$ python yad2k.py yolo.cfg yolo.weights model_data/yolo.h5
+$ pythonw yad2k.py yolo.cfg yolo.weights model_data/yolo.h5 # we need to use pythonw when calling DeepLeague!
 ```
 Running that last command is extremely important. It might produce some errors which you can hopefully Google and quickly solve. I've found it really is dependent on your system + hardware.
 
@@ -54,7 +58,7 @@ Here's an example of me running the tool with a YouTube link. This method automa
 This command specifies to start at the 30 second mark and end 1 minute in. This is useful when you only want to analyze a part of a VOD. The frames that are output are saved to the "output" folder as specified by the command below.
 
 ```sh
-python test_deep_league.py -out output youtube -yt https://www.youtube.com/watch?v=vPwZW1FvtWA -yt_path /output -start 0:00:30 -end 0:01:00
+pythonw test_deep_league.py -out output youtube -yt https://www.youtube.com/watch?v=vPwZW1FvtWA -yt_path /output -start 0:00:30 -end 0:01:00
 ```
 
 You should first see the download start:
@@ -68,15 +72,13 @@ Then you should see DeepLeague start predicting bounding boxes.
 If you want to use a local mp4 file that you recorded yourself use the command below where -mp4 tells the script where the VOD is on your computer.
 
 ```sh
-python test_deep_league.py -out output mp4 -mp4 /Volumes/DATA/data/data/C9_CLG_G_2_MARCH_12_2017/vod.mp4
+pythonw test_deep_league.py -out output mp4 -mp4 /Volumes/DATA/data/data/C9_CLG_G_2_MARCH_12_2017/vod.mp4
 ```
 
 ### How do I get the dataset:
 
 I've split the dataset into multiple .npz files so it isn't just one massive file. I mainly did this to make batch training easier. Plus, its really annoying when you are downloading one big file and that download randomly fails and you need to start all over.
 
-Also, I have already split the dataset into training, testing, and validation sets which splits the data into 80%, 17.5%, and 2.5% cuts respectively.
-
-These .npz files only have the cropped mini maps frames and the bounding box information associated with every frame. If that's all you want, perfect. You can download it here.
+Also, I have already split the dataset into training, testing, and validation sets which splits the data into 80%, 17.5%, and 2.5% cuts respectively. These .npz files only have the cropped mini maps frames and the bounding box information associated with every frame. If that's all you want, perfect. You can download it here.
 
 If you want help reading this npz file, check out ```def visualize_npz_data``` [here](https://github.com/farzaa/DeepLeague/blob/master/vis_data.py).
