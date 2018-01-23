@@ -1,4 +1,8 @@
-# DeepLeague + Dataset of over 100,000 labeled images to further computer vision research within eSports - by Farza  
+# DeepLeague - leveraging computer vision and deep learning on the League of Legends mini map + a dataset of over 100,000 labeled images to further A.I research within esports.
+
+[Please read the blog post here. This repo just explains how to get setup. The blog will explain what this actually is!](https://medium.com/p/d275fd17c4e0/)
+
+### Thanks so much to the amazing developers at [YAD2K](https://github.com/allanzelener/YAD2K). DeepLeague is built upon my custom fork of their repo and would not be possible without their amazing work.
 
 ![Alt text](https://media.giphy.com/media/3ohc0PVVsgt578uBkA/giphy.gif)
 ### Disclaimer
@@ -10,7 +14,7 @@ If you have questions contact me on [Twitter](https://twitter.com/FarzaTV).
 
 ### How do I get DeepLeague?
 
-You'll need [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [conda](https://conda.io/docs/user-guide/install/index.html), and [brew](https://brew.sh/). Once you install them you can check if everything works okay by typing in these commands in your terminal. I've confirmed that these steps work on Mac OS. Thing should be VERY similar for Linux as well. You'll just have to use some other method to install packages (like apt-get) instead of ```brew``` which I use a few times. Windows Users, you're on your own :(. But it shouldn't be to tough if you know your way around the command line.
+You'll need [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [conda](https://conda.io/docs/user-guide/install/index.html), and [brew](https://brew.sh/). Once you install them you can check if everything works okay by typing in these commands in your terminal. I've confirmed that these steps work on Mac OS. Thing should be VERY similar for Linux as well. You'll just have to use some other method to install packages (like apt-get or whatever you prefer) instead of ```brew``` which I use a few times. Windows Users, you're on your own :(. But it shouldn't be to tough if you know your way around the command line.
 
 ```sh
 $ conda
@@ -76,9 +80,10 @@ pythonw test_deep_league.py -out output mp4 -mp4 /Volumes/DATA/data/data/C9_CLG_
 ```
 
 ### How do I get the dataset:
+Download it [here](https://archive.org/details/DeepLeague100K).
 
-I've split the dataset into multiple .npz files so it isn't just one massive file. I mainly did this to make batch training easier. Plus, its really annoying when you are downloading one big file and that download randomly fails and you need to start all over.
+I've split the dataset into multiple .npz files so it isn't just one massive file. I mainly did this to make batch training easier. I've compressed it down to one big 30GB file you can ```wget``` at this [link](https://archive.org/compress/DeepLeague100K). I recommend ```wget``` because it can resume failed downloads. The worst feeling is when a big download is about to finish and your internet crashes causing you to lose the entire download.
 
-Also, I have already split the dataset into training, testing, and validation sets which splits the data into 80%, 17.5%, and 2.5% cuts respectively. These .npz files only have the cropped mini maps frames and the bounding box information associated with every frame. If that's all you want, perfect. You can download it here.
+Also, I have already split the dataset into training, testing, and validation sets which splits the data into 80%, 17.5%, and 2.5% cuts respectively. These .npz files only have the cropped mini maps frames and the bounding box information associated with every frame.
 
 If you want help reading this npz file, check out ```def visualize_npz_data``` [here](https://github.com/farzaa/DeepLeague/blob/master/vis_data.py).
