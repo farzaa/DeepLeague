@@ -28,7 +28,7 @@ If you were able to run those three commands without any errors, you can continu
 $ git clone https://github.com/farzaa/DeepLeague.git
 $ cd DeepLeague
 $ cd YAD2K
-$ conda create - n DeepLeague python=3.6
+$ conda create -n DeepLeague python=3.6
 $ source activate DeepLeague
 $ conda install python.app # this install python as a framework for mat plot lib.
 
