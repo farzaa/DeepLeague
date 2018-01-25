@@ -14,7 +14,9 @@ If you have questions contact me on [Twitter](https://twitter.com/FarzaTV).
 
 ### How do I get DeepLeague?
 
-You'll need [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [conda](https://conda.io/docs/user-guide/install/index.html), and [brew](https://brew.sh/). Once you install them you can check if everything works okay by typing in these commands in your terminal. I've confirmed that these steps work on Mac OS. See the steps below to know how to make it work on Linux using Conda. You'll just have to use some other method to install packages (like apt-get or whatever you prefer) instead of ```brew``` which I use a few times. Windows Users, you're on your own :(. But it shouldn't be to tough if you know your way around the command line.
+You'll need [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [conda](https://conda.io/docs/user-guide/install/index.html), and [brew](https://brew.sh/). Once you install them you can check if everything works okay by typing in these commands in your terminal. I've confirmed that these steps work on Mac OS. See the steps below to know how to make it work on Linux using Conda. Windows 10 Users, I have confirmed that following the Ubuntu install instructions and using a Linux [subsystem](https://docs.microsoft.com/en-us/windows/wsl/install-win10) is the easiest
+way for you to get going.
+
 
 ```sh
 $ conda
@@ -23,6 +25,9 @@ $ brew
 ```
 
 If you were able to run those three commands without any errors, you can continue.
+
+### Instructions for running on OS X using Conda
+
 ```sh
 # get the repo.
 $ git clone https://github.com/farzaa/DeepLeague.git
