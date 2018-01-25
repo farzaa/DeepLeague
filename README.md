@@ -82,6 +82,12 @@ wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolo.cfg
 python yad2k.py yolo.cfg yolo.weights model_data/yolo.h5
 ```
 
+Running that last command is extremely important. It might produce some errors which you can hopefully Google and quickly solve. I've found it really is dependent on your system + hardware.
+
+You are almost good to go. Last thing you need is get the [file for the weights](https://drive.google.com/open?id=1-r_4Ex3OC-MTcTwNE7xJkdpiSz_3rb8A). This is the core file behind the magic of DeepLeague
+
+Download this and put it in the /YAD2K directory. The test script will expect it to be here.
+
 ### How do I run DeepLeague?
 Honestly, this repo has so many tiny functions. But, let me explain the easiest way to get this going if all you want to do is analyze a VOD (which most of you want I presume). the ```test_deep_league.py``` is the key to running everything. Its a little command line tool I made that lets you input a VOD to analyze using three different ways: a YouTube link, path to local MP4, path to a directory of images. I like the YouTube link option best, but if you have trouble with it feel free to use the MP4 approach instead. All you need is a 1080P VOD of a League game. Its extremely important its 1080p or else my scripts will incorrectly crop the mini map. Also, DeepLeague is only trained on mini maps from 1080P video. Other sizes aren't tested.
 
