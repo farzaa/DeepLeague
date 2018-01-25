@@ -14,7 +14,7 @@ If you have questions contact me on [Twitter](https://twitter.com/FarzaTV).
 
 ### How do I get DeepLeague?
 
-You'll need [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [conda](https://conda.io/docs/user-guide/install/index.html), and [brew](https://brew.sh/). Once you install them you can check if everything works okay by typing in these commands in your terminal. I've confirmed that these steps work on Mac OS. Thing should be VERY similar for Linux as well. You'll just have to use some other method to install packages (like apt-get or whatever you prefer) instead of ```brew``` which I use a few times. Windows Users, you're on your own :(. But it shouldn't be to tough if you know your way around the command line.
+You'll need [git](https://git-scm.com/book/en/v2/Getting-Started-Installing-Git), [conda](https://conda.io/docs/user-guide/install/index.html), and [brew](https://brew.sh/). Once you install them you can check if everything works okay by typing in these commands in your terminal. I've confirmed that these steps work on Mac OS. See the steps below to know how to make it work on Linux using Conda. You'll just have to use some other method to install packages (like apt-get or whatever you prefer) instead of ```brew``` which I use a few times. Windows Users, you're on your own :(. But it shouldn't be to tough if you know your way around the command line.
 
 ```sh
 $ conda
@@ -54,8 +54,28 @@ Running that last command is extremely important. It might produce some errors w
 You are almost good to go. Last thing you need is get the [file for the weights](https://drive.google.com/open?id=1-r_4Ex3OC-MTcTwNE7xJkdpiSz_3rb8A). This is the core file behind the magic of DeepLeague
 
 Download this and put it in the /YAD2K directory. The test script will expect it to be here.
-# conda ubuntu framework not needed
-# pythonw not needed
+
+### Instructions for running on Ubuntu 16.04 using Conda
+
+You can install Conda using the guide from  the [official docs](https://conda.io/docs/user-guide/install/linux.html).
+
+```sh
+# get the repo.
+git clone https://github.com/farzaa/DeepLeague.git
+# create the new env
+conda env create -f requirements.yml
+source activate DeepLeague
+
+cd DeepLeague/YAD2K
+
+# Download the weights file
+wget http://pjreddie.com/media/files/yolo.weights
+wget https://archive.org/download/DeepLeagueWeights/trained_stage_3_best.h5
+wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolo.cfg
+
+# run the command to configure the model
+python yad2k.py yolo.cfg yolo.weights model_data/yolo.h5
+```
 
 ### How do I run DeepLeague?
 Honestly, this repo has so many tiny functions. But, let me explain the easiest way to get this going if all you want to do is analyze a VOD (which most of you want I presume). the ```test_deep_league.py``` is the key to running everything. Its a little command line tool I made that lets you input a VOD to analyze using three different ways: a YouTube link, path to local MP4, path to a directory of images. I like the YouTube link option best, but if you have trouble with it feel free to use the MP4 approach instead. All you need is a 1080P VOD of a League game. Its extremely important its 1080p or else my scripts will incorrectly crop the mini map. Also, DeepLeague is only trained on mini maps from 1080P video. Other sizes aren't tested.
@@ -66,6 +86,9 @@ This command specifies to start at the 30 second mark and end 1 minute in. This 
 
 ```sh
 pythonw test_deep_league.py -out output youtube -yt https://www.youtube.com/watch?v=vPwZW1FvtWA -yt_path /output -start 0:00:30 -end 0:01:00
+
+# if you're using Linux
+python test_deep_league.py -out output youtube -yt https://www.youtube.com/watch?v=vPwZW1FvtWA -yt_path /output -start 0:00:30 -end 0:01:00
 ```
 
 You should first see the download start:
