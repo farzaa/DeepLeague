@@ -8,7 +8,6 @@ import csv
 # tuples of file_name, youtube_link, game_start_time, game_end_time
 CSV_FILE_PATH = '/Users/flynn/Documents/DeepLeague/data/vod_info.csv'
 
-
 with open(CSV_FILE_PATH, 'rt') as csvfile:
     reader = csv.reader(csvfile)
 
@@ -42,7 +41,7 @@ with open(CSV_FILE_PATH, 'rt') as csvfile:
             if not os.path.exists('data/' + folder_name + '/socket.json'):
                 print("JSON File exists for %s in the completed_games folder", folder_name)
                 shutil.copy('new_games/games/' + json_file + '.json','data/' + folder_name + '/socket.json')
-                print('Copied to folder in "data" directory!')
+                print('Copied to folder in "ta" directory!')
 
         else:
             print("JSON file %s for %s didn't exist!" % (json_file, folder_name))

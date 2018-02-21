@@ -124,7 +124,7 @@ champs_in_game = os.path.expanduser(args.champs_in_game)
 user_did_specify_champs = False
 
 if champs_in_game != "":
-    user_did_specify_champs = true
+    user_did_specify_champs = True
     champs_in_game = champs_in_game.split(" ")
 
 if args.subcommand == 'images':
@@ -199,6 +199,13 @@ boxes, scores, classes = yolo_eval(
     score_threshold=args.score_threshold,
     iou_threshold=args.iou_threshold)
 
+
+outfile = open('/output/game_data.json', 'w')
+data_to_write = []
+
+
+
+
 def test_yolo(image, image_file_name):
     if is_fixed_size:  # TODO: When resizing we can use minibatch input.
         resized_image = image.resize(
@@ -225,6 +232,10 @@ def test_yolo(image, image_file_name):
         })
 
     print('Found {} boxes for {}'.format(len(out_boxes), image_file_name))
+
+    # Write data to a JSON file located within the 'output/' directory.
+    # This ASSUMES that the game comes from a spectated video starting at 0:00
+    # Else, data will not be alligned!
 
     font = ImageFont.truetype(
         font='font/FiraMono-Medium.otf',
@@ -256,7 +267,6 @@ def test_yolo(image, image_file_name):
         else:
             text_origin = np.array([left, top + 1])
 
-        # My kingdom for a good redistributable image drawing library.
         for i in range(thickness):
             draw.rectangle(
                 [left + i, top + i, right - i, bottom - i],
@@ -311,7 +321,7 @@ def _main():
             except IsADirectoryError:
                 continue
 
-            image = Image.open(os.path.join(test_images_path, image_file_name))
+            image = Image.open(os.path.join(test_images_path, image_file_name)).crop((1645, 805, 1920, 1080))
             test_yolo(image, image_file_name)
 
 
