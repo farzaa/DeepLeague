@@ -200,7 +200,7 @@ boxes, scores, classes = yolo_eval(
     iou_threshold=args.iou_threshold)
 
 
-outfile = open('/output/game_data.json', 'w')
+outfile = open('output/game_data.json', 'w')
 data_to_write = []
 
 
