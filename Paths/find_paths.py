@@ -25,9 +25,7 @@ bot_side_scuttle_crop = (160, 190, 175, 205)
 top_side_scuttle_crop = (85, 115, 70, 100)
 
 
-sample_image_path = 'frames/126.jpg'
-red_side_red_temp = '/Users/flynn/Desktop/temp5.png'
-
+sample_image_path = 'frames/372.jpg'
 
 
 display_image = None
@@ -66,60 +64,80 @@ def do_template_match(crop, mini_map_img, template):
     else:
         return False
 
+# returns a dictionary indicating which jungle camps are "seen" by the template match.
+def camps_seen_for_frame(path_to_frame):
+    camps_seen = {
+        'red_toad': None,
+        'red_blue_buff': None,
+        'red_wolves': None,
+        'red_chickens': None,
+        'red_red_buff': None,
+        'red_krugs': None,
+        'blue_toad': None,
+        'blue_blue_buff': None,
+        'blue_wolves': None,
+        'blue_chickens': None,
+        'blue_red_buff': None,
+        'blue_krugs': None,
+        'top_side_scuttle': None,
+        'bot_side_scuttle': None
+    }
+
+    display_image = cv2.imread(path_to_frame, cv2.IMREAD_COLOR)[minimap_crop[0]:minimap_crop[1], minimap_crop[2]:minimap_crop[3]]
+
+    # assuming a full 1920x1080 image coming in.
+    mini_map_img = display_image.copy()
+
+    cv2.imwrite('minimap_example.jpg', cv2.imread(sample_image_path, cv2.IMREAD_COLOR)[minimap_crop[0]:minimap_crop[1], minimap_crop[2]:minimap_crop[3]])
+
+    for template_name in os.listdir('templates/'):
+        if 'red_toad_template' in template_name:
+            template = cv2.imread('templates/red_toad_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(red_toad_crop, mini_map_img, template)
+        if 'red_blue_buff_template' in template_name:
+            template = cv2.imread('templates/red_blue_buff_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(red_blue_buff_crop, mini_map_img, template)
+        if 'red_wolves_template' in template_name:
+            template = cv2.imread('templates/red_wolves_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(red_wolves_crop, mini_map_img, template)
+        if 'red_chickens_template' in template_name:
+            template = cv2.imread('templates/red_chickens_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(red_chickens_crop, mini_map_img, template)
+        if 'red_red_buff_template' in template_name:
+            template = cv2.imread('templates/red_red_buff_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(red_red_buff_crop , mini_map_img, template)
+        if 'red_krugs_template' in template_name:
+            template = cv2.imread('templates/red_krugs_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(red_krugs_crop, mini_map_img, template)
+
+        if 'blue_toad_template' in template_name:
+            template = cv2.imread('templates/blue_toad_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(blue_toad_crop, mini_map_img, template)
+        if 'blue_blue_buff_template' in template_name:
+            template = cv2.imread('templates/blue_blue_buff_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(blue_blue_buff_crop, mini_map_img, template)
+        if 'blue_wolves_template' in template_name:
+            template = cv2.imread('templates/blue_wolves_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(blue_wolves_crop, mini_map_img, template)
+        if 'blue_chickens_template' in template_name:
+            template = cv2.imread('templates/blue_chickens_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(blue_chickens_crop, mini_map_img, template)
+        if 'blue_red_buff_crop' in template_name:
+            template = cv2.imread('templates/blue_red_buff_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(blue_red_buff_crop, mini_map_img, template)
+        if 'blue_krugs_template' in template_name:
+            template = cv2.imread('templates/blue_krugs_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(blue_krugs_crop, mini_map_img, template)
+
+        if 'top_side_scuttle_template' in template_name:
+            template = cv2.imread('templates/top_side_scuttle_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(top_side_scuttle_crop, mini_map_img, template)
+        if 'bot_side_scuttle_template' in template_name:
+            template = cv2.imread('templates/bot_side_scuttle_template.png', cv2.IMREAD_COLOR)
+            box = do_template_match(bot_side_scuttle_crop, mini_map_img, template)
+
+
+
 if __name__ == '__main__':
     for image_path in sort_files_numerically('frames/'):
-        display_image = cv2.imread('frames/' + image_path, cv2.IMREAD_COLOR)[minimap_crop[0]:minimap_crop[1], minimap_crop[2]:minimap_crop[3]]
-
-        # assuming a full 1920x1080 image coming in.
-        mini_map_img = display_image.copy()
-
-
-        cv2.imwrite('minimap_example.jpg', cv2.imread(sample_image_path, cv2.IMREAD_COLOR)[minimap_crop[0]:minimap_crop[1], minimap_crop[2]:minimap_crop[3]])
-
-        for template_name in os.listdir('templates/'):
-            if 'red_toad_template' in template_name:
-                template = cv2.imread('templates/red_toad_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(red_toad_crop, mini_map_img, template)
-            if 'red_blue_buff_template' in template_name:
-                template = cv2.imread('templates/red_blue_buff_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(red_blue_buff_crop, mini_map_img, template)
-            if 'red_wolves_template' in template_name:
-                template = cv2.imread('templates/red_wolves_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(red_wolves_crop, mini_map_img, template)
-            if 'red_chickens_template' in template_name:
-                template = cv2.imread('templates/red_chickens_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(red_chickens_crop, mini_map_img, template)
-            if 'red_red_buff_template' in template_name:
-                template = cv2.imread('templates/red_red_buff_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(red_red_buff_crop , mini_map_img, template)
-            if 'red_krugs_template' in template_name:
-                template = cv2.imread('templates/red_krugs_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(red_krugs_crop, mini_map_img, template)
-
-            if 'blue_toad_template' in template_name:
-                template = cv2.imread('templates/blue_toad_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(blue_toad_crop, mini_map_img, template)
-            if 'blue_blue_buff_template' in template_name:
-                template = cv2.imread('templates/blue_blue_buff_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(blue_blue_buff_crop, mini_map_img, template)
-            if 'blue_wolves_template' in template_name:
-                template = cv2.imread('templates/blue_wolves_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(blue_wolves_crop, mini_map_img, template)
-            if 'blue_chickens_template' in template_name:
-                template = cv2.imread('templates/blue_chickens_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(blue_chickens_crop, mini_map_img, template)
-            if 'blue_krugs_template' in template_name:
-                template = cv2.imread('templates/blue_krugs_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(blue_krugs_crop, mini_map_img, template)
-
-
-            if 'top_side_scuttle_template' in template_name:
-                template = cv2.imread('templates/top_side_scuttle_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(top_side_scuttle_crop, mini_map_img, template)
-            if 'bot_side_scuttle_template' in template_name:
-                template = cv2.imread('templates/bot_side_scuttle_template.png', cv2.IMREAD_COLOR)
-                box = do_template_match(bot_side_scuttle_crop, mini_map_img, template)
-
-
-        cv2.imshow('frame', display_image)
-        cv2.waitKey(0)
+        camps_seen = camps_seen_for_frame('frames/' + image_path)

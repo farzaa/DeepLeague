@@ -103,6 +103,7 @@ image_option = subparsers.add_parser('images')
 image_option.add_argument(
     '-images',
     '--test_images_path',
+    type=str,
     help='path to images to test. These images MUST be size 1920x1080')
 
 npz_option = subparsers.add_parser('npz')
@@ -200,10 +201,10 @@ boxes, scores, classes = yolo_eval(
     iou_threshold=args.iou_threshold)
 
 
+# Save the output into a compact JSON file.
 outfile = open('/output/game_data.json', 'w')
+# This will be appended with an object for every frame.
 data_to_write = []
-
-
 
 
 def test_yolo(image, image_file_name):
@@ -242,6 +243,10 @@ def test_yolo(image, image_file_name):
         size=np.floor(3e-2 * image.size[1] + 0.5).astype('int32'))
     thickness = (image.size[0] + image.size[1]) // 300
 
+    data = {}
+    data['timestamp'] = '0:00'
+    data['champs'] = {}
+
     for i, c in reversed(list(enumerate(out_classes))):
         predicted_class = class_names[c]
         box = out_boxes[i]
@@ -262,6 +267,10 @@ def test_yolo(image, image_file_name):
         right = min(image.size[0], np.floor(right + 0.5).astype('int32'))
         print(label, (left, top), (right, bottom))
 
+        # Save important data to JSON.
+        data['champs'][predicted_class] = score
+
+
         if top - label_size[1] >= 0:
             text_origin = np.array([left, top - label_size[1]])
         else:
@@ -275,6 +284,8 @@ def test_yolo(image, image_file_name):
             [tuple(text_origin), tuple(text_origin + label_size)],
             fill=colors[c])
         draw.text(text_origin, label, fill=(0, 0, 0), font=font)
+
+
         del draw
 
     image.save(os.path.join(output_path, image_file_name), quality=90)
