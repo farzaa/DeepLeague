@@ -200,9 +200,8 @@ boxes, scores, classes = yolo_eval(
     score_threshold=args.score_threshold,
     iou_threshold=args.iou_threshold)
 
-
 # Save the output into a compact JSON file.
-outfile = open('/output/game_data.json', 'w')
+outfile = open('output/game_data.json', 'w')
 # This will be appended with an object for every frame.
 data_to_write = []
 
