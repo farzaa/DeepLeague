@@ -71,7 +71,7 @@ cd DeepLeague/YAD2K
 
 # Download the weights file
 wget http://pjreddie.com/media/files/yolo.weights
-wget https://archive.org/download/DeepLeagueWeights/trained_stage_3_best.h5
+wget https://s3-us-west-2.amazonaws.com/mood1995/deep_league/trained_stage_3_best.h5
 wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolo.cfg
 
 # run the command to configure the model
