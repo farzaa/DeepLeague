@@ -50,7 +50,7 @@ $ pip install keras
 $ brew install wget
 $ brew install ffmpeg --with--libvpx # this may take a while.
 $ wget http://pjreddie.com/media/files/yolo.weights
-$ wget https://archive.org/download/DeepLeagueWeights/trained_stage_3_best.h5
+$ wget https://s3-us-west-2.amazonaws.com/mood1995/deep_league/trained_stage_3_best.h5
 $ wget https://raw.githubusercontent.com/pjreddie/darknet/master/cfg/yolo.cfg
 $ pythonw yad2k.py yolo.cfg yolo.weights model_data/yolo.h5 # we need to use pythonw when calling DeepLeague!
 ```
