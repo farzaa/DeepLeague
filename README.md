@@ -110,9 +110,9 @@ pythonw test_deep_league.py -out output mp4 -mp4 /Volumes/DATA/data/data/C9_CLG_
 ```
 
 ### How do I get the dataset:
-Download it [here](https://archive.org/details/DeepLeague100K).
+Download it [here](https://s3-us-west-2.amazonaws.com/mood1995/deep_league/DeepLeague100K.zip).
 
-I've split the dataset into multiple .npz files so it isn't just one massive file. I mainly did this to make batch training easier. I've compressed it down to one big 30GB file you can ```wget``` at this [link](https://archive.org/compress/DeepLeague100K). I recommend ```wget``` because it can resume failed downloads. The worst feeling is when a big download is about to finish and your internet crashes causing you to lose the entire download.
+I've split the dataset into multiple .npz files so it isn't just one massive file. I mainly did this to make batch training easier. I've compressed it down to one big 30GB file you can ```wget``` at this [link](https://s3-us-west-2.amazonaws.com/mood1995/deep_league/DeepLeague100K.zip). I recommend ```wget``` because it can resume failed downloads. The worst feeling is when a big download is about to finish and your internet crashes causing you to lose the entire download.
 
 Also, I have already split the dataset into training, testing, and validation sets which splits the data into 80%, 17.5%, and 2.5% cuts respectively. These .npz files only have the cropped mini maps frames and the bounding box information associated with every frame.
 
